@@ -146,7 +146,6 @@ class ToleanNavbar extends HTMLElement {
                 <a href="#about">ABOUT</a>
                 <a href="#services">SERVICES</a>
                 <a href="#contact">CONTACT</a>
-                <a href="#" data-modal="impressum">LEGAL</a>
             </div>
         </nav>
         <button class="menu-toggle">MENU</button>
