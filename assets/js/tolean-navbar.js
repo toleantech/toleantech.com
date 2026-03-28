@@ -32,12 +32,30 @@ class ToleanNavbar extends HTMLElement {
             }
 
             .logo {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
                 font-family: 'Roboto Condensed', sans-serif;
                 font-weight: 900;
                 font-size: 1.5rem;
                 text-decoration: none;
                 color: black;
                 text-transform: uppercase;
+            }
+
+            .logo-mark {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .logo-mark img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
             }
 
             .nav-links {
@@ -117,12 +135,18 @@ class ToleanNavbar extends HTMLElement {
             }
         </style>
         <nav>
-            <a href="#" class="logo">TOLEAN TECH</a>
+            <a href="#" class="logo">
+                <div class="logo-mark">
+                    <img src="assets/img/logo.svg" alt="Tolean Tech Logo">
+                </div>
+                <span>TOLEAN TECH</span>
+            </a>
             <div class="nav-links">
                 <a href="#hero">HOME</a>
                 <a href="#about">ABOUT</a>
                 <a href="#services">SERVICES</a>
                 <a href="#contact">CONTACT</a>
+                <a href="#" data-modal="impressum">LEGAL</a>
             </div>
         </nav>
         <button class="menu-toggle">MENU</button>
@@ -138,7 +162,12 @@ class ToleanNavbar extends HTMLElement {
         });
 
         navItems.forEach(item => {
-            item.addEventListener('click', () => {
+            item.addEventListener('click', (e) => {
+                const modalId = item.getAttribute('data-modal');
+                if (modalId) {
+                    e.preventDefault();
+                    window.dispatchEvent(new CustomEvent('open-modal', { detail: modalId }));
+                }
                 links.classList.remove('active');
                 toggle.textContent = 'MENU';
             });
